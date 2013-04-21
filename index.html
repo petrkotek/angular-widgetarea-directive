@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<title>Widget Areas Example</title>
+		<link rel="stylesheet" href="angular-widgetareas.css"/>
+		<link rel="stylesheet" href="css/app.css"/>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"/>
+	</head>
+	<body>
+		<h2>Widget Areas Example</h2>
+		<p>This example shows functionality of Widget areas. You can minimize/move widgets/widget-areas. Widgets can be directives with defined possible actions (buttons on the left and right side next to title) or be just static text - all defined in board object in controller.</p>
+		<div ng-controller="WidgetAreasController">
+			<div pk-widget-areas board="board"></div>
+
+			<pre ng-bind="board | json"></pre>
+		</div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/directives.js"></script>
+
+		<script src="lib/angular-ui-multi-sortable.js"></script>
+		<script src="angular-widgetareas.js"></script>
+	</body>
+</html>
