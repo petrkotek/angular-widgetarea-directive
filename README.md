@@ -9,6 +9,11 @@ __Contributors:__
 
 License: [MIT](http://www.opensource.org/licenses/mit-license.php)
 
+## Example & Screenshot ##
+See example is in index.html.
+
+![Screenshot](img/screenshot.png "Screenshot")
+
 ## Dependencies
 * AngularJS & UI (included in index.html from CDN)
 * Twitter Bootstrap (the fluid layout; included in index.html from CDN)
