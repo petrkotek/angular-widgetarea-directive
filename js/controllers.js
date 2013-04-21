@@ -5,7 +5,7 @@
 var controllers = angular.module('myApp.controllers', []);
 
 // simple controller which exposes board variable from boardService to pk-widget-area directive, see index.html
-controllers.controller("WidgetAreasController", ['$scope', 'boardService',
+controllers.controller("WidgetAreaController", ['$scope', 'boardService',
 function($scope, boardService) {
-	$scope.board = boardService.board;
+	$scope.widgetArea = boardService.widgetArea;
 }]);

@@ -1,16 +1,16 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('myApp', ['pk.widgetAreas', 'myApp.directives', 'myApp.controllers', 'myApp.services']);
+var app = angular.module('myApp', ['pk.widgetArea', 'myApp.directives', 'myApp.controllers', 'myApp.services']);
 
 // config factory, which can define default actions on left & right side
-angular.module('pk.widgetAreas.config', [])
-.factory('pk.widgetAreas.config', ['boardService',
+angular.module('pk.widgetArea.config', [])
+.factory('pk.widgetArea.config', ['boardService',
 function(boardService) {
 	return {
 		// default actions for widgetAres
-		widgetAreas: {
-			actionsRight: ['deleteWidgetArea']
+		blocks: {
+			actionsRight: ['deleteBlock']
 		},
 		// default actions for widgets
 		widgets: {
@@ -28,10 +28,10 @@ function(boardService) {
 					}
 				}
 			},
-			deleteWidgetArea: {
+			deleteBlock: {
 				class: 'icon-remove',
 				ngClick: function(options, iElement) {
-					if (confirm("Do you want to delete widget area '" + options.title + "'?")) {
+					if (confirm("Do you want to delete block '" + options.title + "'?")) {
 						boardService.delete(iElement);
 					}
 				}

@@ -1,9 +1,9 @@
 var services = angular.module('myApp.services', []);
 
 services.service('boardService', ['$parse', function($parse) {
-	// definition of a board (widget areas)
-	var board = {
-		widgetAreas:[
+	// definition of a widget area
+	var widgetArea = {
+		blocks:[
 			{
 				options: {
 					title: 'Widget Area 0'
@@ -99,8 +99,8 @@ services.service('boardService', ['$parse', function($parse) {
 		delete : function(iElement) {
 			var subset = iElement.parent().attr('model-subset');
 			var index = iElement.index();
-			($parse(subset)(board)).splice(index, 1);
+			($parse(subset)(widgetArea)).splice(index, 1);
 		},
-		board : board
+		widgetArea : widgetArea
 	}
 }]);

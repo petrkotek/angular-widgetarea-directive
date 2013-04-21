@@ -1,20 +1,20 @@
-/* widget-area related */
-.widget-area {
+/* block related */
+.block {
 	
 }
 
 /* column related */
-.widget-area .column {
+.block .column {
 	margin: 0 !important;
 }
-.widget-area .column.span1 { width: 8.33%; }
-.widget-area .column.span2 { width: 16.66%; }
-.widget-area .column.span3 { width: 25%; }
-.widget-area .column.span4 { width: 33.33%; }
-.widget-area .column.span5 { width: 41.66%; }
-.widget-area .column.span6 { width: 50%; }
-.widget-area .column.span7 { width: 58.33%; }
-.widget-area .column.span8 { width: 66.66%; }
+.block .column.span1 { width: 8.33%; }
+.block .column.span2 { width: 16.66%; }
+.block .column.span3 { width: 25%; }
+.block .column.span4 { width: 33.33%; }
+.block .column.span5 { width: 41.66%; }
+.block .column.span6 { width: 50%; }
+.block .column.span7 { width: 58.33%; }
+.block .column.span8 { width: 66.66%; }
 
 /* widget & placeholder related */
 .widget {
@@ -22,15 +22,15 @@
 	border: 1px #ccc solid;
 	margin-bottom: 20px;
 }
-.widget-area .column .widget {
+.block .column .widget {
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-.widget-area .column:first-child .widget {
+.block .column:first-child .widget {
 	margin-left: 0;
 }
-.widget-area .column:last-child .widget {
+.block .column:last-child .widget {
 	margin-right: 0;
 }
 
@@ -41,13 +41,13 @@
 }
 
 /* widget area head related */
-.widget-area-head {
+.block-head {
 	border: 1px #ccc solid;
 	background-color: #f0f0f0;
 	margin-bottom: 20px;
 }
 
-.widget-area-head span.title {
+.block-head span.title {
 	font-weight: bold;
 }
 
@@ -64,15 +64,15 @@
 	font-size: 12px;
 	*/
 }
-.widget-head i:hover, .widget-area-head i:hover {
+.widget-head i:hover, .block-head i:hover {
 	opacity: 1;
 }
-.widget-head i, .widget-area-head i {
+.widget-head i, .block-head i {
 	opacity: .4;
 	margin-left: 2px;
 	margin-right: 2px;
 }
-.widget-head i.pull-right, .widget-area-head i.pull-right {
+.widget-head i.pull-right, .block-head i.pull-right {
 	margin-top: 3px;
 }
 
@@ -84,10 +84,10 @@
 	border-bottom-width: 0;
 }
 
-/* minimized widget-area */
-.widget-area.minimized .widget-area-content {
+/* minimized block */
+.block.minimized .block-content {
 	display: none;
 }
-.widget-area.minimized {
+.block.minimized {
 	border-bottom-width: 0;
 }

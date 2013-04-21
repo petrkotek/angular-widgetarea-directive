@@ -1,7 +1,7 @@
 'use strict';
 
 /* Directives */
-var directives = angular.module('pk.widgetAreas', ['ui', 'pk.widgetAreas.config']);
+var directives = angular.module('pk.widgetArea', ['ui', 'pk.widgetArea.config']);
 
 /**
  * UI - default settings for sortable
@@ -14,14 +14,14 @@ angular.module('ui.config', [])
 });
 
 /**
- * Default config for pkWidgetAreas directive
+ * Default config for pkWidgetArea directive
  */
-directives.value('pk.widgetAreas.defaultConfig', {
+directives.value('pk.widgetArea.defaultConfig', {
 	widgets: {
 		actionsLeft: ['minimize'],
 		actionsRight: []
 	},
-	widgetAreas: {
+	blocks: {
 		actionsLeft: ['minimize'],
 		actionsRight: []
 	},
@@ -43,24 +43,24 @@ directives.value('pk.widgetAreas.defaultConfig', {
 /**
  * Config factory
  */
-directives.factory('pkWidgetAreaConfig', ['pk.widgetAreas.defaultConfig', 'pk.widgetAreas.config',
+directives.factory('pkWidgetAreaConfig', ['pk.widgetArea.defaultConfig', 'pk.widgetArea.config',
 function(pkDefaultConfig, pkConfig) {
 	return {
-		widgetAreas: angular.extend({}, pkDefaultConfig.widgetAreas, pkConfig.widgetAreas),
+		blocks: angular.extend({}, pkDefaultConfig.blocks, pkConfig.blocks),
 		widgets: angular.extend({}, pkDefaultConfig.widgets, pkConfig.widgets),
 		actions: angular.extend({}, pkDefaultConfig.actions, pkConfig.actions)
 	};
 }]);
 
 /**
- * Widget areas
+ * Widget area
  */
-directives.directive('pkWidgetAreas', [function() {
+directives.directive('pkWidgetArea', [function() {
 	return {
 		template:
-				'<div class="widget-areas" ng-model="$parent.board" ui-multi-sortable model-subset="widgetAreas" ui-options="uiOptions">' +
-					'<div pk-widget-area options="widgetArea.options" ng-repeat="widgetArea in board.widgetAreas" class="widget-area row-fluid">' +
-						'<div pk-column options="column.options" ng-repeat="column in widgetArea.columns" ng-model="$parent.board" ui-multi-sortable model-subset="widgetAreas[{{$parent.$parent.$index}}].columns[{{$parent.$index}}].widgets" ui-options="$parent.$parent.columnUiOptions">' +
+				'<div class="widget-area" ng-model="$parent.widgetArea" ui-multi-sortable model-subset="blocks" ui-options="uiOptions">' +
+					'<div pk-block options="block.options" ng-repeat="block in widgetArea.blocks" class="block row-fluid">' +
+						'<div pk-column options="column.options" ng-repeat="column in block.columns" ng-model="$parent.widgetArea" ui-multi-sortable model-subset="blocks[{{$parent.$parent.$index}}].columns[{{$parent.$index}}].widgets" ui-options="$parent.$parent.columnUiOptions">' +
 							'<div pk-widget options="widget.options" ng-repeat="widget in column.widgets"></div>' +
 						'</div>' +
 					'</div>' +
@@ -69,12 +69,12 @@ directives.directive('pkWidgetAreas', [function() {
 		transclude: true,
 		restrict: 'EA',
 		scope: {
-			board: '='
+			widgetArea: '='
 		},
 		link: function(scope) {
 			scope.uiOptions = {
-				connectWith: '.widget-areas',
-				handle: '.widget-area-head',
+				connectWith: '.widget-area',
+				handle: '.block-head',
 				placeholder: "widget placeholder"
 			};
 			scope.columnUiOptions = {
@@ -87,19 +87,19 @@ directives.directive('pkWidgetAreas', [function() {
 }]);
 
 /**
- * Widget area
+ * Block
  */
-directives.directive('pkWidgetArea', ['pkWidgetAreaConfig',
+directives.directive('pkBlock', ['pkWidgetAreaConfig',
 function(config) {
 	return {
 		template:
-			'<div class="widget-area" ng-class="{minimized: isMinimized()}">' +
-				'<div class="widget-area-head">' +
+			'<div class="block" ng-class="{minimized: isMinimized()}">' +
+				'<div class="block-head">' +
 					'<a ng-repeat="actionLeft in actionsLeft" ng-click="actions[actionLeft].ngClick(options, iElement)"><i class="{{actionLeft}} {{actions[actionLeft].class}}" ng-class="actions[actionLeft].ngClass(options)"></i></a>' +
 					'<span class="title">{{options.title}}</span>' +
 					'<a ng-repeat="actionRight in actionsRight | reverse" ng-click="actions[actionRight].ngClick(options, iElement)"><i class="pull-right {{actionRight}} {{actions[actionRight].class}}" ng-class="actions[actionRight].ngClass(options)"></i></a>' +
 				'</div>' +
-			    '<div class="widget-area-content" ng-transclude></div>' +
+			    '<div class="block-content" ng-transclude></div>' +
 			'</div>',
 		replace: true,
 		transclude: true,
@@ -113,8 +113,8 @@ function(config) {
 			};
 			scope.iElement = iElement;
 
-			scope.actionsLeft = config.widgetAreas.actionsLeft;
-			scope.actionsRight = config.widgetAreas.actionsRight;
+			scope.actionsLeft = config.blocks.actionsLeft;
+			scope.actionsRight = config.blocks.actionsRight;
 			scope.actions = config.actions;
 		}
 	};
@@ -190,7 +190,7 @@ function($compile, $injector, config) {
 				// generate simple template
 				template = '<div ' + scope.options.directive + ' options="options"></div>';
 				// fetch actionsLeft, actionsRight and actions
-				$injector.invoke([directiveName + '.widgetAreasConfig', function(value) { directiveWAConfig = value; }]);
+				$injector.invoke([directiveName + '.widgetAreaConfig', function(value) { directiveWAConfig = value; }]);
 			} else {
 				template = scope.options.template;
 			}
@@ -198,7 +198,7 @@ function($compile, $injector, config) {
 				throw 'no options.template neither options.directive specified';
 
 			// construct effective actionsLeft, actionsRight
-			// 1. priority: settings from widget's options, 2. priority: settings from directive config, 3. priority: pkWidgetAreas defaults
+			// 1. priority: settings from widget's options, 2. priority: settings from directive config, 3. priority: pkWidgetArea defaults
 			scope.actionsLeft = scope.options.actionsLeft || directiveWAConfig.actionsLeft || config.widgets.actionsLeft;
 			scope.actionsRight = scope.options.actionsRight || directiveWAConfig.actionsRight || config.widgets.actionsRight;
 			// combine available actions

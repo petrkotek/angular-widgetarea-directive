@@ -17,8 +17,8 @@ directives.directive('appTextWidget', [function() {
 		}
 	};
 }]);
-// directive needs to define ".widgetAreasConfig" in following structure
-directives.value('appTextWidget.widgetAreasConfig', {
+// directive needs to define ".widgetAreaConfig" in following structure
+directives.value('appTextWidget.widgetAreaConfig', {
 	// actions displayed on left side (null = keep defaults, [] = none, ['action1', action2] = two actions; strings refer to object in actions. see below);
 	actionsLeft: null,
 	// actions displayed on right side (same structure as actionsLeft)
